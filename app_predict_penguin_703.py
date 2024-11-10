@@ -13,15 +13,21 @@ st.title("Penguin Species prediction using KNN")
 
 st.write("## Input Penguin Information")
 island = st.selectbox('Island', ('Torgersen', 'Biscoe', 'Dream'))
-culmen_length_mm = st.slider('culmen length mm', 0.0, 100.0, 0.0)
-culmen_depth_mm = st.slider('culmen depth per mm', 0.0, 100.0, 0.0)
-flipper_length_mm = st.slider('flipper length per mm', 0.0, 100.0, 0.0)
-body_mass_g = st.slider('body mass per g', 0.0, 100.0, 0.0)
+culmen_length_mm = st.slider('culmen length mm', 0.0, 100.0, 37.0)
+culmen_depth_mm = st.slider('culmen depth per mm', 0.0, 100.0, 19.3)
+flipper_length_mm = st.slider('flipper length per mm', 0.0, 100.0, 192.3)
+body_mass_g = st.slider('body mass per g', 0.0, 100.0, 3750)
 sex = st.selectbox('Sex', ('MALE', 'FEMALE'))
 
-xnew = np.array([[island, culmen_length_mm, culmen_depth_mm, flipper_length_mm, body_mass_g, sex,]])
+x_new = pd.DataFrame() 
+x_new['culmen_length_mm'] = [culmen_length_mm]
+x_new['culmen_depth_mm'] = [culmen_depth_mm]
+x_new['flipper_length_mm'] = [flipper_length_mm]
+x_new['body_mass_g'] = [body_mass_g]
+x_new['island'] = island_encoder.transform(x_new['island'])
+x_new['sex'] = sex_encoder.transform(x_new['sex'])
 
-pred = model.predict(xnew)
+pred = model.predict(x_new)
 
 st.write("## Prediction Result:")
 st.write("Species: ", pred[0])
