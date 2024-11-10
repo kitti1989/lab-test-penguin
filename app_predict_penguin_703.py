@@ -25,8 +25,8 @@ x_new['culmen_length_mm'] = [culmen_length_mm]
 x_new['culmen_depth_mm'] = [culmen_depth_mm]
 x_new['flipper_length_mm'] = [flipper_length_mm]
 x_new['body_mass_g'] = [body_mass_g]
-x_new['island'] = island_encoder.transform(x_new['island'])
-x_new['sex'] = sex_encoder.transform(x_new['sex'])
+x_new['island'] = island_encoder.transform(island)
+x_new['sex'] = sex_encoder.transform(sex)
 
 pred = model.predict(x_new)
 
