@@ -8,7 +8,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 
-model = pickle.load(open('knn_penguin_703.pkl', 'rb'))
+model, species_encoder, island_encoder ,sex_encoder = pickle.load(open('knn_penguin_703.pkl', 'rb'))
 
 st.title("Penguin Species prediction using KNN")
 
