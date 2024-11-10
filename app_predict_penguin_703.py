@@ -34,19 +34,20 @@ sex = st.selectbox("Sex", ['MALE', 'FEMALE'], index=0)
 
 # สร้างปุ่มสำหรับการแสดงข้อมูลที่กรอก
 if st.button("Predict"):
-    # เก็บข้อมูลที่กรอกลงใน DataFrame
+    # เตรียมข้อมูลสำหรับทำนาย
     x_new = pd.DataFrame({
-        'island': [island],
+        'island': [island_encoder.transform([island])[0]],
         'culmen_length_mm': [culmen_length_mm],
         'culmen_depth_mm': [culmen_depth_mm],
         'flipper_length_mm': [flipper_length_mm],
         'body_mass_g': [body_mass_g],
-        'sex': [sex]
+        'sex': [sex_encoder.transform([sex])[0]]
     })
 
-    # แสดงข้อมูลที่กรอกใน DataFrame
-    st.subheader("Input Data")
-    st.write(x_new)
-    
-    # ทดแทนในส่วนนี้ด้วยการทำนายหรือประมวลผลข้อมูลของคุณ
-    st.write("This is where prediction or further processing would happen.")
+    # ทำนาย species โดยใช้โมเดลที่โหลดมา
+    prediction = model.predict(x_new)
+    species = species_encoder.inverse_transform(prediction)[0]
+
+    # แสดงผลลัพธ์ species
+    st.subheader("Predicted Species")
+    st.write(f"The predicted species is: **{species}**")
