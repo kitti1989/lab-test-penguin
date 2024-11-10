@@ -12,6 +12,14 @@ model, species_encoder, island_encoder ,sex_encoder = pickle.load(open('knn_peng
 
 st.title("Penguin Species prediction using KNN")
 
+## default value
+island = 'Torgersen'
+culmen_length_mm = 37.0
+culmen_depth_mm = 19.3
+flipper_length_mm = 192.3
+body_mass_g = 3750
+sex = 'MALE'
+
 st.write("## Input Penguin Information")
 island = st.selectbox('Island', ('Torgersen', 'Biscoe', 'Dream'))
 culmen_length_mm = st.slider('culmen length mm', 0.0, 100.0, 37.0)
